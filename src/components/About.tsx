@@ -10,6 +10,7 @@ const iconMap: Record<string, React.ReactNode> = {
   handshake: <HandshakeIcon size={20} />,
 };
 
+
 export const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
