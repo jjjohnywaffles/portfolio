@@ -56,11 +56,43 @@ export const portfolioData: PortfolioData = {
       title: 'Software Engineer',
       company: 'Matrices',
       location: 'San Francisco, CA',
-      points: [
-        'Delivered full-stack web features using TypeScript, React (Next.js), Zustand, and Tailwind',
-        'Built type-safe APIs and data layers with Drizzle ORM + PostgreSQL and Zod validation; added resilient loading/error states and telemetry',
-        'Improved performance via memoized selectors, minimized re-renders, and virtualization; enhanced responsiveness across complex views',
-        'Increased reliability and developer velocity with reusable UI patterns, feature flags, and stricter TypeScript',
+      summary: 'Building RL solutions for AI Labs and Foundational Model Builders.',
+      sections: [
+        {
+          header: 'Lead Full-stack Development',
+          points: [
+            'Solely designed and implemented a complete, production-grade reinforcement learning environment using Next.js, React, and TypeScript.',
+            'Designed and implemented mock backend architecture using Zustand for state management, integrated with full platform infrastructure including session management, event logging, and JSON patch-based state tracking.',
+            'Built comprehensive data generation system to seed realistic, diverse test scenarios.',
+          ],
+        },
+        {
+          header: 'Core Infrastructure Feature and Code Owner',
+          points: [
+            'Took ownership of an entire critical infrastructure feature used across all company products.',
+            'Became the sole contributor responsible for the majority of implementations across the platform.',
+            'Built complex state comparison logic using JSON diff algorithms and custom validation functions.',
+            'Created reusable patterns and modular utilities adopted across all site implementations.',
+            'Designed database schema and queries for efficient data retrieval and storage using PostgreSQL and Drizzle ORM.',
+          ],
+        },
+        {
+          header: 'Technical Project Manager',
+          points: [
+            'Managed multiple engineers through individual 1:1 meetings, providing technical guidance and mentorship.',
+            'Guided engineers through their own product implementations and infrastructure integrations.',
+            'Facilitated knowledge transfer of complex architectural patterns and best practices.',
+          ],
+        },
+        {
+          header: 'Key Achievements',
+          points: [
+            'End-to-end ownership from design through implementation.',
+            'Infrastructure impact with reusable systems adopted platform-wide.',
+            'Balanced full-stack development with engineering leadership.',
+            'Built scalable systems for large-scale testing scenarios.',
+          ],
+        },
       ],
     },
     {
@@ -69,6 +101,7 @@ export const portfolioData: PortfolioData = {
       title: 'Data Analyst',
       company: 'Advocacy and Community-Based Trauma Studies (ACTS) Lab',
       location: 'New York, NY',
+      summary: 'Building data pipelines and ML tools for trauma research.',
       points: [
         'Developed Python scripts for advanced data preprocessing and applied statistical and machine learning techniques',
         'Collaborated with teams to analyze interview transcripts, uncovering key themes for trauma treatment strategies',
@@ -81,6 +114,7 @@ export const portfolioData: PortfolioData = {
       title: 'Data Analyst Intern',
       company: 'Lilo',
       location: 'New York, NY',
+      summary: 'Driving product decisions through user analytics and visualization.',
       points: [
         'Designed programs for user base analysis, enhancing insights and operational efficiency',
         'Created dynamic visualizations in Python and Tableau, guiding executive decision-making',
@@ -93,6 +127,7 @@ export const portfolioData: PortfolioData = {
       title: 'Graphic Designer and Social Media Manager',
       company: 'PNDA LahiArts',
       location: 'Sacramento, CA',
+      summary: 'Creating visual content and campaigns for Asian arts awareness.',
       points: [
         'Designed graphics for social media campaigns, promoting events and Asian arts awareness',
         'Coordinated event planning and graphic design tasks with team members',

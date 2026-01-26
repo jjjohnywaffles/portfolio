@@ -8,13 +8,20 @@ export interface Education {
   coursework: string;
 }
 
+export interface ExperienceSection {
+  header?: string;
+  points: string[];
+}
+
 export interface Experience {
   id: string;
   period: string;
   title: string;
   company: string;
   location: string;
-  points: string[];
+  summary?: string;
+  sections?: ExperienceSection[];
+  points?: string[]; // Keep for backward compatibility with simpler entries
 }
 
 export interface Project {
