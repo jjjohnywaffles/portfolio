@@ -1,24 +1,28 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useTerminalContext } from '../../../context/TerminalContext';
 
 export const Resume = () => {
+  const { isActive } = useTerminalContext();
   const [dismissed, setDismissed] = useState(false);
   const [action, setAction] = useState<string | null>(null);
 
   const handleDownload = useCallback(() => {
+    if (!isActive) return;
     const link = document.createElement('a');
     link.href = '/Resume.pdf';
     link.download = 'Jonathan_Hu_Resume.pdf';
     link.click();
     setAction('Downloading resume...');
-  }, []);
+  }, [isActive]);
 
   const handleCancel = useCallback(() => {
+    if (!isActive) return;
     setDismissed(true);
-  }, []);
+  }, [isActive]);
 
-  // Listen for keyboard shortcuts
+  // Listen for keyboard shortcuts - only when active
   useEffect(() => {
-    if (dismissed || action) return;
+    if (dismissed || action || !isActive) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();
@@ -33,7 +37,7 @@ export const Resume = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [dismissed, action, handleDownload, handleCancel]);
+  }, [dismissed, action, isActive, handleDownload, handleCancel]);
 
   if (dismissed) {
     return <p className="cmd-muted">Cancelled.</p>;
@@ -49,18 +53,22 @@ export const Resume = () => {
       <br />
       <p className="resume-prompt">What would you like to do?</p>
       <br />
-      <div className="resume-options">
-        <button className="resume-option" onClick={handleDownload}>
+      <div className={`resume-options ${!isActive ? 'disabled' : ''}`}>
+        <button className="resume-option" onClick={handleDownload} disabled={!isActive}>
           <span className="option-key">[D]</span>
           <span className="option-text">Download PDF</span>
         </button>
-        <button className="resume-option cancel" onClick={handleCancel}>
+        <button className="resume-option cancel" onClick={handleCancel} disabled={!isActive}>
           <span className="option-key">[C]</span>
           <span className="option-text">Cancel</span>
         </button>
       </div>
-      <br />
-      <p className="resume-hint">Press D or C to select an option.</p>
+      {isActive && (
+        <>
+          <br />
+          <p className="resume-hint">Press D or C to select an option.</p>
+        </>
+      )}
     </div>
   );
 };

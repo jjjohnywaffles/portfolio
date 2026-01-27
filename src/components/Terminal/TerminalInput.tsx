@@ -5,6 +5,7 @@ interface TerminalInputProps {
   onChange: (value: string) => void;
   onSubmit: (value: string) => void;
   onNavigateHistory: (direction: 'up' | 'down') => void;
+  disabled?: boolean;
 }
 
 export const TerminalInput = ({
@@ -12,11 +13,14 @@ export const TerminalInput = ({
   onChange,
   onSubmit,
   onNavigateHistory,
+  disabled = false,
 }: TerminalInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Focus input on mount and when clicking anywhere in terminal
   useEffect(() => {
+    if (disabled) return;
+
     const handleClick = () => {
       inputRef.current?.focus();
     };
@@ -27,9 +31,11 @@ export const TerminalInput = ({
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, []);
+  }, [disabled]);
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (disabled) return;
+
     if (e.key === 'Enter') {
       e.preventDefault();
       onSubmit(value);
@@ -44,6 +50,7 @@ export const TerminalInput = ({
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (disabled) return;
     onChange(e.target.value);
   };
 
@@ -57,7 +64,7 @@ export const TerminalInput = ({
       </span>
       <div className="terminal-input-wrapper">
         <span className="terminal-input-display">{value}</span>
-        <span className="terminal-cursor" />
+        {!disabled && <span className="terminal-cursor" />}
         <input
           ref={inputRef}
           type="text"
@@ -65,11 +72,12 @@ export const TerminalInput = ({
           value={value}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
-          autoFocus
+          autoFocus={!disabled}
           autoComplete="off"
           autoCorrect="off"
           autoCapitalize="off"
           spellCheck={false}
+          disabled={disabled}
         />
       </div>
     </div>

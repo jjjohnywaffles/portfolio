@@ -1,25 +1,34 @@
 import { useState, useEffect, useCallback } from 'react';
 import { portfolioData } from '../../../data/portfolio';
+import { useTerminalContext } from '../../../context/TerminalContext';
 
 export const Experience = () => {
+  const { isActive } = useTerminalContext();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const handleSelect = useCallback((index: number) => {
-    setSelectedIndex(index);
-  }, []);
+  const handleSelect = useCallback(
+    (index: number) => {
+      if (!isActive) return;
+      setSelectedIndex(index);
+    },
+    [isActive]
+  );
 
   const handleBack = useCallback(() => {
+    if (!isActive) return;
     setSelectedIndex(null);
-  }, []);
+  }, [isActive]);
 
-  // Keyboard navigation
+  // Keyboard navigation - only when active
   useEffect(() => {
+    if (!isActive) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       const key = e.key;
 
       if (selectedIndex !== null) {
-        // When viewing details, B or Escape goes back
-        if (key.toLowerCase() === 'b' || key === 'Escape') {
+        // When viewing details, Escape goes back
+        if (key === 'Escape') {
           e.preventDefault();
           handleBack();
         }
@@ -35,7 +44,7 @@ export const Experience = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedIndex, handleSelect, handleBack]);
+  }, [isActive, selectedIndex, handleSelect, handleBack]);
 
   // Show detailed view for selected experience
   if (selectedIndex !== null) {
@@ -77,11 +86,15 @@ export const Experience = () => {
             )
           )}
         </div>
-        <br />
-        <button className="exp-back-btn" onClick={handleBack}>
-          <span className="option-key">[B]</span>
-          <span className="option-text">Back to list</span>
-        </button>
+        {isActive && (
+          <>
+            <br />
+            <button className="exp-back-btn" onClick={handleBack}>
+              <span className="option-key">[ESC]</span>
+              <span className="option-text">Back to list</span>
+            </button>
+          </>
+        )}
       </div>
     );
   }
@@ -91,9 +104,14 @@ export const Experience = () => {
     <div className="terminal-experience">
       <p className="section-label">// Work Experience</p>
       <br />
-      <div className="exp-list">
+      <div className={`exp-list ${!isActive ? 'disabled' : ''}`}>
         {portfolioData.experience.map((exp, index) => (
-          <button key={exp.id} className="exp-list-item" onClick={() => handleSelect(index)}>
+          <button
+            key={exp.id}
+            className="exp-list-item"
+            onClick={() => handleSelect(index)}
+            disabled={!isActive}
+          >
             <span className="exp-list-key">[{index + 1}]</span>
             <div className="exp-list-info">
               <span className="exp-list-title">{exp.title}</span>
@@ -103,10 +121,14 @@ export const Experience = () => {
           </button>
         ))}
       </div>
-      <br />
-      <p className="exp-hint">
-        Press 1-{portfolioData.experience.length} or click to view details.
-      </p>
+      {isActive && (
+        <>
+          <br />
+          <p className="exp-hint">
+            Press 1-{portfolioData.experience.length} or click to view details.
+          </p>
+        </>
+      )}
     </div>
   );
 };
