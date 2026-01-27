@@ -17,7 +17,7 @@ const maxAsciiLength = Math.max(...asciiLines.map((l) => l.length));
 
 const textLines = [
   '',
-  'Full-stack Software Engineer',
+  'Full-stack Software Engineer @Matrices',
   portfolioData.tagline,
   '',
   'Type `help` to see available commands.',
@@ -41,10 +41,7 @@ export const Terminal = () => {
     return entries.length > 0 ? entries[entries.length - 1].id : null;
   }, [entries]);
 
-  const contextValue = useMemo(
-    () => ({ activeEntryId, currentEntryId: null }),
-    [activeEntryId]
-  );
+  const contextValue = useMemo(() => ({ activeEntryId, currentEntryId: null }), [activeEntryId]);
 
   const handleBootComplete = useCallback(() => {
     setIsBooting(false);
@@ -81,7 +78,7 @@ export const Terminal = () => {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [isTypingWelcome]);
 
-  // Type ASCII art - all lines simultaneously
+  // Type ASCII art
   useEffect(() => {
     if (!isTypingWelcome || isAsciiDone) return;
 

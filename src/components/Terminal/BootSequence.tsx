@@ -24,7 +24,7 @@ export const BootSequence = ({ onComplete }: BootSequenceProps) => {
   const [complete, setComplete] = useState(false);
 
   useEffect(() => {
-    const timers: NodeJS.Timeout[] = [];
+    const timers: ReturnType<typeof setTimeout>[] = [];
 
     bootSteps.forEach((step, index) => {
       const timer = setTimeout(() => {
