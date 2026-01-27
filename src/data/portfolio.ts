@@ -189,13 +189,6 @@ export const portfolioData: PortfolioData = {
       link: 'https://jjjohnywaffles.github.io/interactive_projects/CardCentering/cardcentering.html',
       category: 'interactive',
     },
-    {
-      id: 'code-optimizer',
-      title: 'Code Optimizer',
-      description: 'Python code optimization tool',
-      link: 'https://github.com/jjjohnywaffles/Python-Code-Optimizer/tree/main',
-      category: 'interactive',
-    },
   ],
 
   socialLinks: [
