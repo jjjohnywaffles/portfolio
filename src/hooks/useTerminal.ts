@@ -26,7 +26,7 @@ export const useTerminal = (startEmpty = false) => {
 
     // Handle clear command specially
     if (trimmed === 'clear') {
-      setEntries([{ id: 'welcome', output: getWelcomeMessage() }]);
+      setEntries([]);
       return;
     }
 

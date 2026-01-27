@@ -261,7 +261,7 @@ export const Terminal = () => {
             <div className="terminal-welcome">
               <pre className="ascii-art">{asciiArt}</pre>
               <br />
-              <p className="welcome-title">Full-stack Software Engineer</p>
+              <p className="welcome-title">Full-stack Software Engineer @Matrices</p>
               <p className="welcome-tagline">{portfolioData.tagline}</p>
               <br />
               <p className="welcome-hint">
