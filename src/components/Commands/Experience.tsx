@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { portfolioData } from '../../../data/portfolio';
-import { useTerminalContext } from '../../../context/TerminalContext';
+import { portfolioData } from '../../data/portfolio';
+import { useTerminalContext } from '../../context/TerminalContext';
 
 export const Experience = () => {
   const { isActive } = useTerminalContext();

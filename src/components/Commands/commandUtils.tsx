@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { Welcome } from './Welcome';
 import { Help } from './Help';
 import { About } from './About';
 import { Experience } from './Experience';
@@ -15,11 +14,8 @@ export interface CommandDefinition {
   execute: () => ReactNode;
 }
 
+// Single source of truth for all commands
 export const commands: Record<string, CommandDefinition> = {
-  help: {
-    description: 'Show available commands',
-    execute: () => <Help />,
-  },
   about: {
     description: 'Learn more about me',
     execute: () => <About />,
@@ -56,9 +52,15 @@ export const commands: Record<string, CommandDefinition> = {
     description: 'Clear the terminal',
     execute: () => null,
   },
+  help: {
+    description: 'Show this help message',
+    execute: () => <Help />,
+  },
 };
 
-export const getWelcomeMessage = () => <Welcome />;
+// Get command names and descriptions for help display
+export const getCommandList = () =>
+  Object.entries(commands).map(([name, { description }]) => ({ name, description }));
 
 export const executeCommand = (input: string): ReactNode => {
   const trimmed = input.trim().toLowerCase();

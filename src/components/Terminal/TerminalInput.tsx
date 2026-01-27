@@ -1,4 +1,5 @@
 import { useRef, useEffect, type KeyboardEvent, type ChangeEvent } from 'react';
+import { TerminalPrompt } from './TerminalPrompt';
 
 interface TerminalInputProps {
   value: string;
@@ -56,12 +57,7 @@ export const TerminalInput = ({
 
   return (
     <div className="terminal-input-line">
-      <span className="terminal-prompt">
-        <span className="prompt-user">visitor</span>
-        <span className="prompt-at">@</span>
-        <span className="prompt-host">jonathan.hu</span>
-        <span className="prompt-symbol">$</span>
-      </span>
+      <TerminalPrompt />
       <div className="terminal-input-wrapper">
         <span className="terminal-input-display">{value}</span>
         {!disabled && <span className="terminal-cursor" />}

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { BOOT_TIMING } from './constants';
 
 interface BootStep {
   text: string;
@@ -7,12 +8,12 @@ interface BootStep {
 }
 
 const bootSteps: BootStep[] = [
-  { text: 'Establishing connection', delay: 0, status: 'loading' },
-  { text: 'Connection established', delay: 1200, status: 'success' },
-  { text: 'Loading portfolio data', delay: 1800, status: 'loading' },
-  { text: 'Portfolio data loaded', delay: 3000, status: 'success' },
-  { text: 'Initializing terminal', delay: 3600, status: 'loading' },
-  { text: 'Terminal ready', delay: 4800, status: 'success' },
+  { text: 'Establishing connection', delay: BOOT_TIMING.CONNECTION_START, status: 'loading' },
+  { text: 'Connection established', delay: BOOT_TIMING.CONNECTION_DONE, status: 'success' },
+  { text: 'Loading portfolio data', delay: BOOT_TIMING.LOADING_START, status: 'loading' },
+  { text: 'Portfolio data loaded', delay: BOOT_TIMING.LOADING_DONE, status: 'success' },
+  { text: 'Initializing terminal', delay: BOOT_TIMING.INIT_START, status: 'loading' },
+  { text: 'Terminal ready', delay: BOOT_TIMING.INIT_DONE, status: 'success' },
 ];
 
 interface BootSequenceProps {
@@ -36,8 +37,8 @@ export const BootSequence = ({ onComplete }: BootSequenceProps) => {
     // Complete the boot sequence
     const completeTimer = setTimeout(() => {
       setComplete(true);
-      setTimeout(onComplete, 600);
-    }, 5400);
+      setTimeout(onComplete, BOOT_TIMING.FADE_DELAY);
+    }, BOOT_TIMING.COMPLETE);
     timers.push(completeTimer);
 
     return () => {

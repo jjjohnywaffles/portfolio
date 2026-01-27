@@ -18,5 +18,3 @@ export const useTerminalContext = () => {
 
 // Provider for individual entries
 export const EntryContext = createContext<string | null>(null);
-
-export const useEntryId = () => useContext(EntryContext);

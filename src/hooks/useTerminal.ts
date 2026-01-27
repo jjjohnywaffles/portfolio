@@ -1,5 +1,5 @@
 import { useState, useCallback, type ReactNode } from 'react';
-import { executeCommand, getWelcomeMessage } from '../components/Terminal/commands/commandUtils';
+import { executeCommand } from '../components/Commands/commandUtils';
 
 export interface TerminalEntry {
   id: string;
@@ -7,10 +7,8 @@ export interface TerminalEntry {
   output: ReactNode;
 }
 
-export const useTerminal = (startEmpty = false) => {
-  const [entries, setEntries] = useState<TerminalEntry[]>(
-    startEmpty ? [] : [{ id: 'welcome', output: getWelcomeMessage() }]
-  );
+export const useTerminal = () => {
+  const [entries, setEntries] = useState<TerminalEntry[]>([]);
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [currentInput, setCurrentInput] = useState('');
@@ -65,18 +63,12 @@ export const useTerminal = (startEmpty = false) => {
     [commandHistory, historyIndex]
   );
 
-  const clearInput = useCallback(() => {
-    setCurrentInput('');
-    setHistoryIndex(-1);
-  }, []);
-
   return {
     entries,
     currentInput,
     setCurrentInput,
     processCommand,
     navigateHistory,
-    clearInput,
     commandHistory,
   };
 };

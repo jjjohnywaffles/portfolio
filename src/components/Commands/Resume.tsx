@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useTerminalContext } from '../../../context/TerminalContext';
+import { useTerminalContext } from '../../context/TerminalContext';
 
 export const Resume = () => {
   const { isActive } = useTerminalContext();

@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
-import { EntryContext, TerminalContext } from '../../context/TerminalContext';
 import { useContext } from 'react';
+import { EntryContext, TerminalContext } from '../../context/TerminalContext';
+import { TerminalPrompt } from './TerminalPrompt';
 
 interface TerminalOutputProps {
   id: string;
@@ -17,12 +18,7 @@ export const TerminalOutput = ({ id, command, output }: TerminalOutputProps) => 
         <div className="terminal-output">
           {command !== undefined && (
             <div className="terminal-command-line">
-              <span className="terminal-prompt">
-                <span className="prompt-user">visitor</span>
-                <span className="prompt-at">@</span>
-                <span className="prompt-host">jonathan.hu</span>
-                <span className="prompt-symbol">$</span>
-              </span>
+              <TerminalPrompt />
               <span className="terminal-command-text">{command}</span>
             </div>
           )}

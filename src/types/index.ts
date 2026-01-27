@@ -58,5 +58,3 @@ export interface PortfolioData {
   interactiveProjects: Project[];
   socialLinks: SocialLink[];
 }
-
-export * from './terminal';
